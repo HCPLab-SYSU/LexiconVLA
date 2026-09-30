@@ -14,3 +14,17 @@ Vision-language-action (VLA) models struggle to reuse recurring interactions in 
 ## Teaser
 
 ![LexiconVLA teaser figure](assets/figures/teaser.png)
+
+## Citation
+
+```bibtex
+@misc{wei2026lexiconvlalearningreusableatomic,
+  title={LexiconVLA: Learning Reusable Atomic Action Codebooks for Unseen Tasks},
+  author={Zeming Wei and Jianheng Ye and Xinshuai Song and Sirui Chen and Yang Liu and Liang Lin},
+  year={2026},
+  eprint={2609.36774},
+  archivePrefix={arXiv},
+  primaryClass={cs.RO},
+  url={https://arxiv.org/abs/2609.36774},
+}
+```
