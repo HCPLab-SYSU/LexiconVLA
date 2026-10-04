@@ -7,7 +7,7 @@
 <sup>1</sup> Sun Yat-sen University · <sup>2</sup> Pengcheng Laboratory · <sup>3</sup> X-Era AI Lab  
 <sup>*</sup> Equal contribution · <sup>†</sup> Corresponding author
 
-[Project Page](https://weizeming0821.github.io/LexiconVLA/) · [arXiv](https://arxiv.org/abs/2609.36774) · [PDF](https://arxiv.org/pdf/2609.36774) · [GitHub](https://github.com/HCPLab-SYSU/LexiconVLA)
+[Project Page](https://hcplab-sysu.github.io/LexiconVLA/) · [arXiv](https://arxiv.org/abs/2609.36774) · [PDF](https://arxiv.org/pdf/2609.36774) · [GitHub](https://github.com/HCPLab-SYSU/LexiconVLA)
 
 ## Abstract
 
