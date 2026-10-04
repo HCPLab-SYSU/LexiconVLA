@@ -203,7 +203,8 @@ code { font-family: var(--mono); font-size: .86em; }
 .step-n { font-family: var(--serif); font-style: italic; font-size: 34px; line-height: 1; color: var(--sky); }
 .step h3 { margin: 14px 0 8px; font-size: 26px; font-weight: 720; letter-spacing: -.03em; }
 .step p { margin: 0; font-size: 17px; line-height: 1.6; color: var(--muted); }
-.skills { margin-top: 72px; display: grid; grid-template-columns: .9fr 1.4fr; gap: 56px; align-items: start; }
+.skills { margin-top: 72px; display: grid; grid-template-columns: minmax(0, 1fr); gap: 36px; }
+.skills-head, .lexicon-learning > div:first-child { max-width: 860px; }
 .skills-head p { margin: 14px 0 0; font-size: 18px; line-height: 1.7; color: var(--muted); }
 .skill-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
 .skill { padding: 20px 22px; border-radius: 16px; background: #fff; border: 1px solid var(--line); }
@@ -211,7 +212,7 @@ code { font-family: var(--mono); font-size: .86em; }
 .skill.is-retry code { background: var(--blue-ink); }
 .skill.is-replan code { background: var(--pink-ink); }
 .skill p { margin: 10px 0 0; font-size: 16.5px; line-height: 1.55; color: var(--ink-2); }
-.lexicon-learning { margin-top: 88px; }
+.lexicon-learning { margin-top: 88px; grid-template-columns: minmax(0, 1fr); gap: 36px; }
 .cards-2 { display: grid; gap: 16px; }
 .card { padding: 26px 28px; border-radius: var(--radius); background: #fff; border: 1px solid var(--line); box-shadow: var(--shadow-sm); }
 .card-tag { font-size: 14px; font-weight: 700; color: var(--blue-ink); letter-spacing: .02em; }
