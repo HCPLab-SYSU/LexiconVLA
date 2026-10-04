@@ -3,82 +3,413 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#faf9f6">
-  <meta name="description" content="LexiconVLA: Learning Reusable Atomic Action Codebooks for Unseen Tasks. Paper, method, results, and real-robot demonstrations.">
+  <meta name="theme-color" content="#ffffff">
+  <title>LexiconVLA — Reusable Atomic Action Codebooks</title>
+  <meta name="description" content="LexiconVLA: Learning Reusable Atomic Action Codebooks for Unseen Tasks. Paper, method, results, and simulation and real-robot demonstrations.">
   <meta property="og:type" content="website">
   <meta property="og:title" content="LexiconVLA: Learning Reusable Atomic Action Codebooks for Unseen Tasks">
-  <meta property="og:description" content="Reusable atomic-action codebooks for robot manipulation on unseen tasks.">
-  <meta property="og:image" content="assets/figures/teaser.png">
-  <title>LexiconVLA — Paper & Demos</title>
-  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <meta property="og:description" content="A retrievable atomic-action lexicon that lets one VLA policy compose familiar interactions to solve unseen manipulation tasks.">
+  <meta property="og:url" content="https://hcplab-sysu.github.io/LexiconVLA/">
+  <meta property="og:image" content="https://hcplab-sysu.github.io/LexiconVLA/assets/figures/teaser.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="favicon.ico" sizes="any">
+  <link rel="icon" href="assets/icon/favicon-32.png" type="image/png" sizes="32x32">
+  <link rel="icon" href="assets/icon/icon-192.png" type="image/png" sizes="192x192">
+  <link rel="apple-touch-icon" href="assets/icon/apple-touch-icon.png">
+  <link rel="preload" href="assets/fonts/inter-var.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/instrument-serif-italic.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="styles.css">
+  <script>document.documentElement.classList.add('js')</script>
   <script src="main.js" defer></script>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
+  <div class="scroll-progress" aria-hidden="true"><span></span></div>
+
   <header class="site-header">
-    <nav class="nav-wrap container" aria-label="Main navigation">
-      <a class="wordmark" href="#top">Lexicon<span>VLA</span><span class="wordmark-dot">.</span></a>
-      <button class="mobile-menu" type="button" aria-controls="nav-links" aria-expanded="false" aria-label="Open menu"><span></span><span></span><span></span></button>
+    <nav class="nav container" aria-label="Main navigation">
+      <a class="brand" href="#top" aria-label="LexiconVLA home">
+        <img src="assets/icon/favicon-48.png" width="30" height="30" alt="">
+        <span>Lexicon<b>VLA</b></span>
+      </a>
+      <button class="menu-toggle" type="button" aria-controls="nav-links" aria-expanded="false" aria-label="Open menu"><span></span><span></span></button>
       <div class="nav-links" id="nav-links">
         <a href="#abstract">Abstract</a>
+        <a href="#dataset">Dataset</a>
         <a href="#method">Method</a>
         <a href="#results">Results</a>
-        <a href="#demos">Demos</a>
-        <a class="nav-paper" href="https://arxiv.org/pdf/2609.36774" target="_blank" rel="noopener">Paper <span aria-hidden="true">↗</span></a>
+        <a href="#sim-demos">Simulation</a>
+        <a href="#real-demos">Real World</a>
+        <a href="#citation">BibTeX</a>
+        <a class="nav-cta" href="https://arxiv.org/pdf/2609.36774" target="_blank" rel="noopener">Paper <span aria-hidden="true">↗</span></a>
       </div>
     </nav>
   </header>
 
   <main id="main">
-    <section class="hero container" id="top" aria-labelledby="paper-title">
-      <h1 id="paper-title"><span class="title-name">LexiconVLA:</span> Learning Reusable Atomic Action Codebooks for Unseen Tasks</h1>
-      <div class="authors" id="authors" aria-label="Paper authors"><span>Zeming Wei<sup>1,*</sup></span><span>Jianheng Ye<sup>1,*</sup></span><span>Xinshuai Song<sup>1</sup></span><span>Sirui Chen<sup>1</sup></span><span>Yang Liu<sup>1,3,†</sup></span><span>Liang Lin<sup>1,2,3</sup></span></div>
-      <p class="affiliations"><sup>1</sup> Sun Yat-sen University <span>·</span> <sup>2</sup> Pengcheng Laboratory <span>·</span> <sup>3</sup> X-Era AI Lab</p>
-      <p class="author-note">* Equal contribution &nbsp; † Corresponding author</p>
-      <div class="resource-links" aria-label="Paper resources">
-        <a class="resource-link" href="https://arxiv.org/pdf/2609.36774" target="_blank" rel="noopener"><span class="resource-icon" aria-hidden="true">↗</span><span>Paper <small>PDF</small></span></a>
-        <a class="resource-link" href="https://arxiv.org/abs/2609.36774" target="_blank" rel="noopener"><span class="resource-icon" aria-hidden="true">a</span><span>arXiv <small>Abstract</small></span></a>
-        <a class="resource-link" href="https://github.com/HCPLab-SYSU/LexiconVLA" target="_blank" rel="noopener"><span class="resource-icon" aria-hidden="true">⌘</span><span>GitHub <small>Code</small></span></a>
+    <!-- ============ HERO ============ -->
+    <section class="hero" id="top" aria-labelledby="paper-title">
+      <div class="hero-bg" aria-hidden="true">
+        <span class="orb orb-a"></span><span class="orb orb-b"></span><span class="orb orb-c"></span>
+        <div class="hero-grid"></div>
       </div>
-      <p class="hero-summary">An atomic-action lexicon that helps vision-language-action models retrieve and compose familiar interactions to solve unfamiliar manipulation tasks.</p>
+      <div class="container hero-inner">
+        <div class="hero-mascot" aria-hidden="true">
+          <picture>
+            <source srcset="assets/icon/lexicon-robot.webp" type="image/webp">
+            <img src="assets/icon/lexicon-robot.png" width="640" height="640" alt="" fetchpriority="high">
+          </picture>
+        </div>
+        <h1 id="paper-title" class="hero-title">
+          <span class="hero-name" data-anim="1"><span class="grad">Lexicon</span>VLA</span>
+          <span class="hero-sub" data-anim="2">Learning Reusable Atomic Action Codebooks<br> <em>for Unseen Tasks</em></span>
+        </h1>
+
+        <div class="authors" data-anim="3" aria-label="Authors">
+          <span>Zeming Wei<sup>1,*</sup></span>
+          <span>Jianheng Ye<sup>1,*</sup></span>
+          <span>Xinshuai Song<sup>1</sup></span>
+          <span>Sirui Chen<sup>1</sup></span>
+          <span>Yang Liu<sup>1,3,†</sup></span>
+          <span>Liang Lin<sup>1,2,3</sup></span>
+        </div>
+        <p class="affiliations" data-anim="4">
+          <span><sup>1</sup>Sun Yat-sen University</span>
+          <span><sup>2</sup>Pengcheng Laboratory</span>
+          <span><sup>3</sup>X-Era AI Lab</span>
+        </p>
+        <p class="author-note" data-anim="4">* Equal contribution &nbsp;·&nbsp; † Corresponding author</p>
+
+        <div class="hero-actions" data-anim="5">
+          <a class="btn btn-dark" href="https://arxiv.org/pdf/2609.36774" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h6"/></svg>Paper
+          </a>
+          <a class="btn" href="https://arxiv.org/abs/2609.36774" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 19 12 5l7 14M8.5 13h7"/></svg>arXiv
+          </a>
+          <a class="btn" href="https://github.com/HCPLab-SYSU/LexiconVLA" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6 0 0 0-1.3-3.2 4.2 4.2 0 0 0-.1-3.2s-1.1-.3-3.5 1.3a12.3 12.3 0 0 0-6.2 0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2 0 0 0-.1 3.2A4.6 4.6 0 0 0 4 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21"/></svg>Code
+          </a>
+          <a class="btn" href="#sim-demos">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m8 5 11 7-11 7z"/></svg>Demos
+          </a>
+        </div>
+
+        <!-- Illustrative: an instruction resolved into atomic subtasks -->
+        <div class="plan-ticker" data-anim="6" aria-label="Illustration: an instruction is decomposed into atomic subtasks">
+          <span class="plan-instr">“put the ball in the hoop”</span>
+          <span class="plan-arrow" aria-hidden="true"></span>
+          <ol class="plan-steps">
+            <li style="--i:0">approach</li>
+            <li style="--i:1">grasp</li>
+            <li style="--i:2">transfer</li>
+            <li style="--i:3">release</li>
+          </ol>
+        </div>
+      </div>
+      <a class="scroll-cue" href="#teaser" aria-label="Scroll to content"><span></span></a>
     </section>
 
-    <section class="teaser-section container" aria-labelledby="teaser-title">
-      <h2 id="teaser-title" class="visually-hidden">Teaser figure</h2>
-      <figure class="paper-figure teaser-figure">
-        <a href="assets/figures/teaser.png" target="_blank" rel="noopener" aria-label="Open teaser figure at full size"><img src="assets/figures/teaser.png" width="2800" height="1232" alt="LexiconVLA breaks a task into atomic actions, handles real-robot execution and recovery, and illustrates the gap between task and atomic-action success." fetchpriority="high"></a>
-        <figcaption><strong>Figure 1.</strong> LexiconVLA and motivation. A task is decomposed into retrievable atomic actions, with execution feedback enabling recovery. The diagnostic probe compares full-task and atomic-action success.</figcaption>
+    <!-- ============ STATS ============ -->
+    <section class="stats container" aria-label="Key numbers">
+      <div class="stat reveal"><strong data-count="57803">57,803</strong><span>atomic-action segments in AtomAction</span></div>
+      <div class="stat reveal"><strong data-count="69">69</strong><span>RLBench tasks · 18 action types</span></div>
+      <div class="stat reveal"><strong><span data-count="17.50" data-decimals="2" data-prefix="+">+17.50</span><small>pp</small></strong><span>unseen-task success with BridgeVLA</span></div>
+      <div class="stat reveal"><strong><span data-count="71.08" data-decimals="2">71.08</span><small>%</small></strong><span>overall success on 26 RLBench tasks</span></div>
+    </section>
+
+    <!-- ============ TEASER ============ -->
+    <section class="section section-tight container" id="teaser" aria-label="Teaser figure">
+      <figure class="figure reveal">
+        <button class="figure-media" type="button" data-zoom="assets/figures/teaser.png" aria-label="Enlarge Figure 1">
+          <picture><source srcset="assets/figures/teaser.webp" type="image/webp"><img src="assets/figures/teaser.png" width="2800" height="1231" alt="LexiconVLA decomposes an instruction into atomic-action subtasks and recovers from errors; a diagnostic probe contrasts full-task and atomic-action success." loading="lazy" decoding="async"></picture>
+        </button>
+        <figcaption><b>Figure 1.</b> <strong>LexiconVLA and motivation.</strong> <em>Left:</em> LexiconVLA decomposes an instruction into atomic-action subtasks, executes each with a VLA policy conditioned on codes from a shared codebook, and advances, retries, or replans according to execution feedback; real-robot rollouts show step-wise execution and recovery from a wrong button press. <em>Right:</em> a diagnostic probe on seven tasks, where each atomic subtask is prompted alone from the demonstration state. For existing policies, high full-task success does not translate into reliable or task-consistent atomic execution.</figcaption>
       </figure>
     </section>
 
-    <section class="section section-narrow" id="abstract" aria-labelledby="abstract-title">
-      <div class="container narrow"><div class="section-label"><span>01</span> Abstract</div><h2 id="abstract-title" class="section-title">What if a robot could <em>reuse</em> what it knows?</h2>
-        <div class="abstract-body"><p>Vision-language-action (VLA) models struggle to reuse recurring interactions in unseen tasks. Our diagnostic study reveals that reliable task completion does not imply consistent execution of constituent atomic actions across task contexts. We present <strong>LexiconVLA</strong>, a retrievable atomic-action lexicon for cross-task reuse.</p>
-        <p>Global and detail codebooks capture shared interaction structure and fine-grained execution variation, respectively, preserving both reusable patterns and execution details. Visual-Atomic Action Alignment couples trajectory reconstruction from visual state changes with visual outcome prediction from action codes, grounding the lexicon in motion and its effects. We learn these codebooks with trajectory reconstruction and visual alignment on our <strong>AtomAction</strong> Dataset of 57,803 segments from 69 tasks.</p>
-        <p>A planner and scene-aware adapter translate new goals into code-conditioned subtasks for a shared policy, without skill-specific experts or deployment-time parameter updates. Across five policy backbones on 26 RLBench tasks, LexiconVLA largely maintains performance on 18 seen tasks while improving success on 8 tasks held out from policy training. With BridgeVLA, unseen-task success rises from 16.67% to 34.17% (+17.50 percentage points), and overall success reaches 71.08%. Real-robot experiments demonstrate stepwise execution and failure recovery.</p></div>
+    <!-- ============ ABSTRACT ============ -->
+    <section class="section" id="abstract" aria-labelledby="abstract-title">
+      <div class="container narrow">
+        <p class="eyebrow reveal"><span>01</span>Abstract</p>
+        <h2 id="abstract-title" class="section-title reveal">What if a robot could <em>reuse</em> what it already knows?</h2>
+        <div class="prose reveal">
+          <p>Vision-language-action (VLA) models struggle to reuse recurring interactions in unseen tasks. Our diagnostic study reveals that reliable task completion does not imply consistent execution of constituent atomic actions across task contexts. We present <strong>LexiconVLA</strong>, a retrievable atomic-action lexicon for cross-task reuse.</p>
+          <p>Global and detail codebooks capture shared interaction structure and fine-grained execution variation, respectively, preserving both reusable patterns and execution details. Visual-Atomic Action Alignment couples trajectory reconstruction from visual state changes with visual outcome prediction from action codes, grounding the lexicon in motion and its effects. We learn these codebooks with trajectory reconstruction and visual alignment on our <strong>AtomAction</strong> Dataset of 57,803 segments from 69 tasks.</p>
+          <p>A planner and scene-aware adapter translate new goals into code-conditioned subtasks for a shared policy, without skill-specific experts or deployment-time parameter updates. Across five policy backbones on 26 RLBench tasks, LexiconVLA largely maintains performance on 18 seen tasks while improving success on 8 tasks held out from policy training. With BridgeVLA, unseen-task success rises from 16.67% to 34.17% (+17.50 percentage points), and overall success reaches 71.08%, the highest among methods with reported results. Real-robot experiments demonstrate stepwise execution and failure recovery.</p>
+        </div>
       </div>
     </section>
 
-    <section class="section method-section" id="method" aria-labelledby="method-title">
+    <!-- ============ MOTIVATION ============ -->
+    <section class="section section-soft" id="motivation" aria-labelledby="motivation-title">
       <div class="container">
-        <div class="section-intro"><div class="section-label"><span>02</span> Method</div><h2 id="method-title" class="section-title">A shared vocabulary<br>for <em>robot action.</em></h2><p>LexiconVLA organizes recurring interaction phases into codes that a single policy can retrieve for new combinations of subtasks.</p></div>
-        <div class="method-points" aria-label="Three stages of LexiconVLA"><div><span>01 / PLAN</span><h3>Decompose</h3><p>A VLM planner turns a task instruction into atomic subtasks.</p></div><div><span>02 / RETRIEVE</span><h3>Condition</h3><p>A scene-aware adapter selects global and detail codes for the active subtask.</p></div><div><span>03 / EXECUTE</span><h3>Recover</h3><p>A shared VLA acts, while feedback guides the next step, retry, or replan.</p></div></div>
-        <figure class="paper-figure"><a href="assets/figures/framework.png" target="_blank" rel="noopener" aria-label="Open LexiconVLA method figure at full size"><img src="assets/figures/framework.png" width="2400" height="1091" loading="lazy" alt="Overview of the planner, lexicon adapter, shared VLA, and feedback loop."></a><figcaption><strong>Figure 2.</strong> A planner schedules atomic subtasks; the adapter retrieves codes from the frozen lexicon to condition a shared VLA policy.</figcaption></figure>
-        <div class="figure-explainer"><div><span class="small-label">LEARNING THE LEXICON</span><h3>Grounded in motion <em>and outcome.</em></h3></div><p>The global codebook captures reusable interaction structure; detail codes retain execution variation. Visual-Atomic Action Alignment (V3A) links the learned codes to both motion and its visual effects.</p></div>
-        <figure class="paper-figure"><a href="assets/figures/vqaa.png" target="_blank" rel="noopener" aria-label="Open VQAA figure at full size"><img src="assets/figures/vqaa.png" width="2400" height="1121" loading="lazy" alt="Vector-Quantized Atomic Action Model with trajectory reconstruction and visual-atomic action alignment."></a><figcaption><strong>Figure 3.</strong> The Vector-Quantized Atomic Action Model learns global and detail codes with trajectory reconstruction and V3A.</figcaption></figure>
+        <div class="split">
+          <div>
+            <p class="eyebrow reveal"><span>02</span>Motivation</p>
+            <h2 id="motivation-title" class="section-title reveal">Finishing a task ≠ <em>mastering its parts.</em></h2>
+            <p class="lead reveal">We probe five pretrained manipulation policies of diverse architectures on seven tasks, prompting each atomic subtask alone from its demonstration start state. Task-level training alone does not yield atomic actions that can be reliably invoked on their own — a prerequisite for recombining them in unseen tasks.</p>
+            <p class="lead muted reveal">Even the contact-free primitive <em>approach</em> varies widely across task contexts within a single policy.</p>
+          </div>
+          <div class="probe reveal" role="img" aria-label="Task-averaged success across five policies: 65.7 to 95.7 percent on complete tasks, versus 28.5 to 38.9 percent on isolated atomic actions.">
+            <p class="probe-title">Task-averaged success across five policies</p>
+            <div class="probe-row">
+              <div class="probe-label"><b>Complete tasks</b><span>65.7 – 95.7%</span></div>
+              <div class="probe-track"><span class="probe-range is-task" style="--from:65.7;--to:95.7"></span></div>
+            </div>
+            <div class="probe-row">
+              <div class="probe-label"><b>Isolated atomic actions</b><span>28.5 – 38.9%</span></div>
+              <div class="probe-track"><span class="probe-range is-atomic" style="--from:28.5;--to:38.9"></span></div>
+            </div>
+            <div class="probe-axis" aria-hidden="true"><span>0</span><span>25</span><span>50</span><span>75</span><span>100%</span></div>
+            <p class="probe-note">Each bar spans the lowest to highest policy. Details in Appendix A.1 of the paper.</p>
+          </div>
+        </div>
       </div>
     </section>
 
-    <section class="section dataset-section" id="dataset" aria-labelledby="dataset-title"><div class="container"><div class="section-intro"><div class="section-label"><span>03</span> Dataset</div><h2 id="dataset-title" class="section-title">Meet <em>AtomAction.</em></h2><p>Mechanism-level action segments extracted from RLBench demonstrations, each paired with trajectory, boundary observations, and language descriptions.</p></div><div class="dataset-numbers"><div><strong>57,803</strong><span>atomic-action segments</span></div><div><strong>69</strong><span>manipulation tasks</span></div><div><strong>18</strong><span>action types</span></div></div><figure class="paper-figure"><a href="assets/figures/dataset.png" target="_blank" rel="noopener" aria-label="Open AtomAction dataset figure at full size"><img src="assets/figures/dataset.png" width="2400" height="1003" loading="lazy" alt="AtomAction categories and segment counts, with a start-to-end example of an atomic action."></a><figcaption><strong>Figure 4.</strong> AtomAction's action categories, contributing tasks, sample counts, and an example segment.</figcaption></figure></div></section>
+    <!-- ============ DATASET ============ -->
+    <section class="section" id="dataset" aria-labelledby="dataset-title">
+      <div class="container">
+        <div class="section-head">
+          <p class="eyebrow reveal"><span>03</span>AtomAction Dataset</p>
+          <h2 id="dataset-title" class="section-title reveal">One segment, <em>one mechanism.</em></h2>
+          <p class="lead reveal">Most VLA datasets pair a whole demonstration with one instruction, and coarse labels such as <em>open</em> lump together pulling, hinge rotation, and lid flipping. AtomAction instead cuts RLBench expert demonstrations into temporally localized segments that each realize exactly one mechanism-level atomic action.</p>
+        </div>
+        <div class="dataset-grid">
+          <div class="feature reveal"><span class="feature-k">Trajectory</span><p>Low-dimensional state of the phase: end-effector pose, joint positions, velocities and torques, gripper state and contact forces.</p></div>
+          <div class="feature reveal"><span class="feature-k">Observations</span><p>Five-view RGB, depth, and mask observations at the start and end boundaries of the segment.</p></div>
+          <div class="feature reveal"><span class="feature-k">Language</span><p>An atomic-action label plus eight phase-level descriptions written in different language styles.</p></div>
+        </div>
+        <figure class="figure reveal">
+          <button class="figure-media" type="button" data-zoom="assets/figures/dataset.png" aria-label="Enlarge Figure 2">
+            <picture><source srcset="assets/figures/dataset.webp" type="image/webp"><img src="assets/figures/dataset.png" width="2400" height="1003" alt="AtomAction categories and contributing tasks, segment counts per category, and an example segment with start and end frames and language descriptions." loading="lazy" decoding="async"></picture>
+          </button>
+          <figcaption><b>Figure 2.</b> <strong>The AtomAction Dataset.</strong> <em>Left:</em> atomic-action categories (inner ring) and contributing tasks (outer ring). <em>Top right:</em> segment counts per category; coloured block widths show individual task contributions. <em>Bottom right:</em> an example segment with start/end frames and language descriptions.</figcaption>
+        </figure>
+      </div>
+    </section>
 
-    <section class="section results-section" id="results" aria-labelledby="results-title"><div class="container"><div class="section-intro"><div class="section-label"><span>04</span> Results</div><h2 id="results-title" class="section-title">Built to transfer <em>beyond the seen.</em></h2><p>Across five VLA backbones and 26 RLBench tasks, the lexicon improves success on tasks held out from policy training.</p></div><div class="result-highlight"><div class="result-number"><span>UNSEEN-TASK SUCCESS · BRIDGEVLA BACKBONE</span><div><del>16.67%</del><i aria-hidden="true">→</i><strong>34.17%</strong></div><p>+17.50 percentage points with LexiconVLA</p></div><div class="result-number secondary"><span>OVERALL SUCCESS · 26 TASKS</span><strong>71.08%</strong><p>Highest among methods with reported results in the paper</p></div></div><p class="result-context">Real-robot evaluation: 62.0% average success across five tasks in the standard setting and 56.0% under unseen perturbations. Each setting evaluates 10 trials per task; see the paper for full protocols and per-task results.</p><figure class="paper-figure results-figure"><a href="assets/figures/rollouts.png" target="_blank" rel="noopener" aria-label="Open qualitative rollout figure at full size"><img src="assets/figures/rollouts.png" width="2400" height="1509" loading="lazy" alt="Qualitative rollouts in simulation and the real world, including error recovery and comparisons with baseline methods."></a><figcaption><strong>Figure 5.</strong> Representative qualitative rollouts in simulation and the real world, including recovery after execution errors and human disturbance.</figcaption></figure></div></section>
+    <!-- ============ METHOD ============ -->
+    <section class="section section-soft" id="method" aria-labelledby="method-title">
+      <div class="container">
+        <div class="section-head">
+          <p class="eyebrow reveal"><span>04</span>Method</p>
+          <h2 id="method-title" class="section-title reveal">A shared vocabulary <em>for robot action.</em></h2>
+          <p class="lead reveal">LexiconVLA conditions one shared manipulation policy on a frozen lexicon of global and detail codes. New goals become sequences of code-conditioned subtasks — no skill-specific experts, no parameter updates at deployment.</p>
+        </div>
 
-    <section class="section demos-section" id="demos" aria-labelledby="demos-title"><div class="container"><div class="section-intro"><div class="section-label"><span>05</span> Real-robot demonstrations</div><h2 id="demos-title" class="section-title">Unseen conditions. <em>Real actions.</em></h2><p>Side-by-side rollouts of LexiconVLA, BridgeVLA, and π<sub>0.5</sub>. Each clip is a representative demonstration, not the full trial set.</p></div><div class="demo-index" aria-label="Jump to a generalization experiment"><a href="#demo-distractor">Distractor</a><a href="#demo-category">Category</a><a href="#demo-instruction">Instruction</a><a href="#demo-height">Height</a><a href="#demo-human">Human Interference</a></div><div id="demo-sections"></div></div></section>
+        <ol class="steps">
+          <li class="step reveal">
+            <span class="step-n">01</span>
+            <h3>Plan</h3>
+            <p>A VLM planner decomposes the task instruction into atomic subtask instructions.</p>
+          </li>
+          <li class="step reveal">
+            <span class="step-n">02</span>
+            <h3>Retrieve</h3>
+            <p>A scene-aware adapter maps the active subtask and current images to global and detail codes from the lexicon.</p>
+          </li>
+          <li class="step reveal">
+            <span class="step-n">03</span>
+            <h3>Execute</h3>
+            <p>A lightweight injection module conditions the shared VLA policy on the retrieved codes while it acts.</p>
+          </li>
+        </ol>
 
-    <section class="section paper-end"><div class="container end-inner"><div><div class="section-label"><span>06</span> Read more</div><h2 class="section-title">Explore the <em>full paper.</em></h2><p>Methods, experiments, ablations, and evaluation details are available in the manuscript.</p></div><a class="end-button" href="https://arxiv.org/pdf/2609.36774" target="_blank" rel="noopener">Open paper PDF <span aria-hidden="true">↗</span></a></div></section>
+        <figure class="figure reveal">
+          <button class="figure-media" type="button" data-zoom="assets/figures/framework.png" aria-label="Enlarge Figure 3">
+            <picture><source srcset="assets/figures/framework.webp" type="image/webp"><img src="assets/figures/framework.png" width="2400" height="1091" alt="Overview of LexiconVLA: a VLM planner, a scene-aware adapter that retrieves codes from the frozen lexicon, a shared VLA policy, and a feedback loop." loading="lazy" decoding="async"></picture>
+          </button>
+          <figcaption><b>Figure 3.</b> <strong>Overview of LexiconVLA.</strong> A VLM-based planner decomposes the task instruction into atomic subtasks. Given the active subtask instruction and current observations, a scene-aware adapter retrieves entries from the frozen atomic-action lexicon — global and detail codes — to condition a shared VLA policy. Execution feedback drives subtask progression and recovery through four skills.</figcaption>
+        </figure>
 
-    <section class="section citation-section" id="citation" aria-labelledby="citation-title"><div class="container"><div class="section-label"><span>07</span> Citation</div><h2 id="citation-title" class="section-title">Cite <em>LexiconVLA.</em></h2><pre><code>@misc{wei2026lexiconvlalearningreusableatomic,
+        <div class="skills">
+          <div class="skills-head reveal">
+            <h3 class="sub-title">Closed-loop scheduling</h3>
+            <p>The planner assesses visual feedback after each step and picks one of four skills. Subtask transitions and replanning refresh the retrieved codes from updated observations.</p>
+          </div>
+          <div class="skill-grid">
+            <div class="skill reveal"><code>NEXT</code><p>Advance once the active subtask is complete.</p></div>
+            <div class="skill reveal"><code>CONTINUE</code><p>Keep the active subtask when more execution is needed.</p></div>
+            <div class="skill reveal is-retry"><code>RETRY</code><p>Repeat a failed step, optionally returning to an earlier subtask.</p></div>
+            <div class="skill reveal is-replan"><code>REPLAN</code><p>Regenerate the plan when scene changes invalidate it.</p></div>
+          </div>
+        </div>
+
+        <div class="split split-top lexicon-learning">
+          <div>
+            <h3 class="sub-title reveal">Learning the lexicon</h3>
+            <p class="lead reveal">The Vector-Quantized Atomic Action Model (VQAA) grounds every code in both <em>motion</em> and its <em>visual effect</em>. Its decoder is used only during codebook training.</p>
+          </div>
+          <div class="cards-2">
+            <div class="card reveal">
+              <span class="card-tag">(a) Atomic Action-NSVQ</span>
+              <h4>Global + detail codebooks</h4>
+              <p>A Transformer encodes each 39-D segment; pooling gives one global code for reusable structure, learnable queries give detail codes for execution variation. Noise-substituted VQ and a conditional flow-matching decoder train them by trajectory reconstruction.</p>
+            </div>
+            <div class="card reveal">
+              <span class="card-tag">(b) Visual-Atomic Action Alignment</span>
+              <h4>V3A: what the action changes</h4>
+              <p>Actions are reconstructed from the visual change between initial and final frames, and final-frame features are predicted from the initial observation and the global code — tying each code to its observable outcome.</p>
+            </div>
+          </div>
+        </div>
+
+        <figure class="figure reveal">
+          <button class="figure-media" type="button" data-zoom="assets/figures/vqaa.png" aria-label="Enlarge Figure 4">
+            <picture><source srcset="assets/figures/vqaa.webp" type="image/webp"><img src="assets/figures/vqaa.png" width="2400" height="1121" alt="The Vector-Quantized Atomic Action Model with Atomic Action-NSVQ and Visual-Atomic Action Alignment." loading="lazy" decoding="async"></picture>
+          </button>
+          <figcaption><b>Figure 4.</b> <strong>Vector-Quantized Atomic Action Model (VQAA).</strong> (a) Atomic Action-NSVQ encodes an atomic-action segment into discrete codes from two learnable codebooks using Noise Substitution in Vector Quantization; a conditional flow-matching decoder provides trajectory-reconstruction supervision. (b) V3A adds two auxiliary objectives: reconstructing actions from initial-to-final visual changes, and predicting final-frame features conditioned on the initial observation and the global action code.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- ============ RESULTS ============ -->
+    <section class="section" id="results" aria-labelledby="results-title">
+      <div class="container">
+        <div class="section-head">
+          <p class="eyebrow reveal"><span>05</span>Results</p>
+          <h2 id="results-title" class="section-title reveal">Built to transfer <em>beyond the seen.</em></h2>
+          <p class="lead reveal">RLBench with 18 seen tasks and 8 tasks held out from policy training. Full-task success over 25 episodes per task in each of three random seeds.</p>
+        </div>
+
+        <div class="headline reveal">
+          <div class="headline-item">
+            <span class="headline-k">Unseen-task success · BridgeVLA backbone</span>
+            <div class="headline-v"><s>16.67%</s><i aria-hidden="true">→</i><strong>34.17%</strong></div>
+            <p>More than doubled, surpassing the strongest baseline (3D Diffuser Actor, 28.67%) by 5.50 points.</p>
+          </div>
+          <div class="headline-item">
+            <span class="headline-k">Overall success · 26 tasks</span>
+            <div class="headline-v"><s>67.28%</s><i aria-hidden="true">→</i><strong>71.08%</strong></div>
+            <p>Highest among all evaluated methods, while seen-task success is largely preserved.</p>
+          </div>
+        </div>
+
+        <div class="panel reveal" id="sim-results">
+          <div class="panel-head">
+            <div>
+              <h3 class="panel-title">Unseen-task success across five backbones</h3>
+              <p class="panel-sub">Success rate (%) on the 8 policy-unseen RLBench tasks, mean over three seeds.</p>
+            </div>
+            <div class="seg" role="tablist" aria-label="Result view">
+              <button role="tab" aria-selected="true" aria-controls="view-chart" id="tab-chart" data-view="chart">Chart</button>
+              <button role="tab" aria-selected="false" aria-controls="view-table" id="tab-table" data-view="table">Table</button>
+            </div>
+          </div>
+          <div id="view-chart" role="tabpanel" aria-labelledby="tab-chart">
+            <div class="legend" aria-hidden="true">
+              <span><i class="dot dot-base"></i>Base policy</span>
+              <span><i class="dot dot-ours"></i>+ LexiconVLA</span>
+              <span><i class="rule-key"></i>Strongest baseline · 3D Diffuser Actor (28.67)</span>
+            </div>
+            <div class="dumbbell" id="dumbbell"></div>
+          </div>
+          <div id="view-table" role="tabpanel" aria-labelledby="tab-table" hidden>
+            <div class="table-wrap">
+              <table class="data-table">
+                <caption class="visually-hidden">Multi-task performance on RLBench, mean ± std success rate (%) over three seeds.</caption>
+                <thead><tr><th scope="col">Method</th><th scope="col">Unseen (8)</th><th scope="col">Seen (18)</th><th scope="col">Overall (26)</th></tr></thead>
+                <tbody>
+                  <tr><th scope="row">Act3D</th><td>15.67±2.52</td><td>65.19±1.22</td><td>49.95±1.43</td></tr>
+                  <tr><th scope="row">3D Diffuser Actor</th><td>28.67±0.29</td><td>78.30±1.92</td><td>63.03±1.34</td></tr>
+                  <tr class="group-end"><th scope="row">SAM2Act</th><td>15.50±1.50</td><td>84.30±1.80</td><td>63.13±1.02</td></tr>
+                  <tr><th scope="row">PerAct</th><td>19.00±1.50</td><td>37.11±2.12</td><td>31.54±1.34</td></tr>
+                  <tr class="ours group-end"><th scope="row">LexiconVLA (PerAct)</th><td>19.33±0.58</td><td>39.48±2.11</td><td>33.28±1.62</td></tr>
+                  <tr><th scope="row">RVT</th><td>11.83±2.31</td><td>59.33±2.04</td><td>44.72±2.00</td></tr>
+                  <tr class="ours group-end"><th scope="row">LexiconVLA (RVT)</th><td>14.50±1.80</td><td>60.81±1.14</td><td>46.56±0.99</td></tr>
+                  <tr><th scope="row">RVT-2</th><td>18.00±0.50</td><td>75.63±1.00</td><td>57.90±0.64</td></tr>
+                  <tr class="ours group-end"><th scope="row">LexiconVLA (RVT-2)</th><td>19.83±0.76</td><td>76.30±0.34</td><td>58.92±0.31</td></tr>
+                  <tr><th scope="row">BridgeVLA++</th><td>19.17±2.02</td><td>79.70±1.12</td><td>61.08±1.20</td></tr>
+                  <tr class="ours group-end"><th scope="row">LexiconVLA (BridgeVLA++)</th><td>26.83±1.15</td><td>77.04±1.68</td><td>61.59±0.99</td></tr>
+                  <tr><th scope="row">BridgeVLA</th><td>16.67±1.26</td><td><b>89.78±1.02</b></td><td>67.28±0.94</td></tr>
+                  <tr class="ours"><th scope="row">LexiconVLA (BridgeVLA)</th><td><b>34.17±2.02</b></td><td>87.48±0.93</td><td><b>71.08±1.16</b></td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <div class="results-pair">
+          <div class="panel reveal">
+            <h3 class="panel-title">Ablation · BridgeVLA backbone</h3>
+            <p class="panel-sub">Unseen-task success (%). Every component contributes to transfer.</p>
+            <div class="hbars" id="ablation"></div>
+          </div>
+          <div class="panel reveal">
+            <h3 class="panel-title">Real robot · 5 tasks × 10 trials</h3>
+            <p class="panel-sub">Average success (%) under training conditions and under unseen perturbations.</p>
+            <div class="hbars hbars-grouped" id="real-summary"></div>
+          </div>
+        </div>
+
+        <figure class="figure reveal">
+          <button class="figure-media" type="button" data-zoom="assets/figures/rollouts.png" aria-label="Enlarge Figure 5">
+            <picture><source srcset="assets/figures/rollouts.webp" type="image/webp"><img src="assets/figures/rollouts.png" width="2400" height="1509" alt="Qualitative rollouts in simulation and the real world, comparing LexiconVLA with baselines, including recovery after a missed grasp and a human disturbance." loading="lazy" decoding="async"></picture>
+          </button>
+          <figcaption><b>Figure 5.</b> <strong>Qualitative rollouts in simulation and the real world.</strong> Rows 1–2: policy-unseen RLBench tasks; rows 3–4: real-robot tasks. After a missed grasp (yellow box) or a human disturbance (red box), our planner triggers <code>RETRY</code>, re-executing the failed subtask with codes re-retrieved from the current observation, whereas the baselines fail to recover.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- ============ SIM DEMOS ============ -->
+    <section class="section section-dark" id="sim-demos" aria-labelledby="sim-title">
+      <div class="container">
+        <div class="section-head">
+          <p class="eyebrow reveal"><span>06</span>Simulation demos · RLBench</p>
+          <h2 id="sim-title" class="section-title reveal">Every task, <em>step by step.</em></h2>
+          <p class="lead reveal">Pick a task to see LexiconVLA (BridgeVLA backbone) succeed outright, recover with <code>RETRY</code> or <code>REPLAN</code>, and the BridgeVLA baseline failing — often from the very same initial scene.</p>
+        </div>
+        <div class="explorer reveal" id="sim-explorer">
+          <div class="explorer-bar">
+            <div class="seg seg-dark" role="tablist" aria-label="Task split" id="sim-split">
+              <button role="tab" aria-selected="true" data-split="unseen">Policy-unseen <span class="count">7</span></button>
+              <button role="tab" aria-selected="false" data-split="seen">Seen <span class="count">18</span></button>
+            </div>
+            <div class="speed" role="group" aria-label="Playback speed" data-speed-group="sim">
+              <span>Speed</span><button type="button" data-speed="1" aria-pressed="true">1×</button><button type="button" data-speed="2" aria-pressed="false">2×</button><button type="button" data-speed="4" aria-pressed="false">4×</button>
+            </div>
+          </div>
+          <div class="dot-legend" aria-hidden="true">
+            <span><i class="k-success"></i>One-pass success</span>
+            <span><i class="k-retry"></i>Recovery (RETRY / REPLAN)</span>
+            <span><i class="k-bridgevla"></i>BridgeVLA failure</span>
+          </div>
+          <div class="chips" id="sim-tasks" role="tablist" aria-label="RLBench task"></div>
+          <div class="stage" id="sim-stage" aria-live="polite"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ REAL DEMOS ============ -->
+    <section class="section" id="real-demos" aria-labelledby="real-title">
+      <div class="container">
+        <div class="section-head">
+          <p class="eyebrow reveal"><span>07</span>Real-robot demos</p>
+          <h2 id="real-title" class="section-title reveal">Unseen conditions. <em>Real actions.</em></h2>
+          <p class="lead reveal">A Franka arm compared with BridgeVLA and π<sub>0.5</sub>, all fine-tuned on the same 30 demonstrations per task. Each clip is one representative rollout; the success rates come from Table 3 of the paper (10 trials per condition).</p>
+        </div>
+        <div class="explorer explorer-light reveal" id="real-explorer">
+          <div class="explorer-bar">
+            <div class="chips chips-inline" id="real-tabs" role="tablist" aria-label="Real-robot experiment"></div>
+            <div class="speed" role="group" aria-label="Playback speed" data-speed-group="real">
+              <span>Speed</span><button type="button" data-speed="2" aria-pressed="false">2×</button><button type="button" data-speed="4" aria-pressed="true">4×</button><button type="button" data-speed="8" aria-pressed="false">8×</button>
+            </div>
+          </div>
+          <div class="stage" id="real-stage" aria-live="polite"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ CONCLUSION + CITATION ============ -->
+    <section class="section section-soft" id="citation" aria-labelledby="citation-title">
+      <div class="container narrow">
+        <p class="eyebrow reveal"><span>08</span>Citation</p>
+        <h2 id="citation-title" class="section-title reveal">Cite <em>LexiconVLA.</em></h2>
+        <div class="bibtex reveal">
+          <button class="copy-btn" type="button" data-copy="#bibtex-code">Copy</button>
+<pre><code id="bibtex-code">@misc{wei2026lexiconvlalearningreusableatomic,
   title={LexiconVLA: Learning Reusable Atomic Action Codebooks for Unseen Tasks},
   author={Zeming Wei and Jianheng Ye and Xinshuai Song and Sirui Chen and Yang Liu and Liang Lin},
   year={2026},
@@ -86,8 +417,23 @@
   archivePrefix={arXiv},
   primaryClass={cs.RO},
   url={https://arxiv.org/abs/2609.36774},
-}</code></pre></div></section>
+}</code></pre>
+        </div>
+      </div>
+    </section>
   </main>
-  <footer class="site-footer"><div class="container footer-inner"><a class="wordmark" href="#top">Lexicon<span>VLA</span><span class="wordmark-dot">.</span></a><p>Learning reusable atomic action codebooks for unseen tasks.</p><a href="#top">Back to top ↑</a></div></footer>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <a class="brand" href="#top"><img src="assets/icon/favicon-48.png" width="28" height="28" alt=""><span>Lexicon<b>VLA</b></span></a>
+      <p>Learning reusable atomic action codebooks for unseen tasks.</p>
+      <a class="to-top" href="#top">Back to top ↑</a>
+    </div>
+  </footer>
+
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Enlarged media" hidden>
+    <button class="lightbox-close" type="button" aria-label="Close">×</button>
+    <div class="lightbox-body"></div>
+  </div>
 </body>
 </html>
