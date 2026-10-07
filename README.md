@@ -1,4 +1,4 @@
-<p align="center"><img src="assets/icon/lexicon-robot.png" width="160" alt="LexiconVLA"></p>
+<p align="center"><img src="docs/assets/icon/lexicon-robot.png" width="160" alt="LexiconVLA"></p>
 
 # LexiconVLA: Learning Reusable Atomic Action Codebooks for Unseen Tasks
 
@@ -17,7 +17,7 @@ Demos on the project page: interactive RLBench simulation rollouts (25 tasks, su
 
 ## Teaser
 
-![LexiconVLA teaser figure](assets/figures/teaser.png)
+![LexiconVLA teaser figure](docs/assets/figures/teaser.png)
 
 ## Citation
 
